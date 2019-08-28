@@ -1,0 +1,41 @@
+body{
+    background-color: #FFE0A8;
+    font-family: 'Railway', sans-serif;
+    /*Use Google fonts!*/
+    margin: 5em 15%;
+    /*margin: Top Right Bottom Left*/   
+}
+
+h1 , h4 {
+    color: red;
+}
+
+h3{
+    margin-left: 5px;
+    padding-left: 5px;
+    color: rgb(167, 62, 1);
+}
+
+p{
+    text-align: justify;
+    text-indent: 5px;
+}
+
+a {
+    color: rgb(0, 165, 102);
+    text-decoration: none;
+}
+
+ol , ul {
+    margin-bottom: 1em;
+}
+
+img {
+    width: 500px;
+}
+
+hr {
+    border: gray;
+    border-style: dotted;
+    padding: 1px 1px;
+}
