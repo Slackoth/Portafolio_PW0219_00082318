@@ -1,0 +1,28 @@
+body {
+    background-color:#b7fbd7;
+}
+
+h1 {
+    color: 	#03396c;
+}
+
+h1 span{
+    color: #005b96
+}
+
+section:nth-last-child(1)> h2 {
+    color: blue;
+}
+
+ul > li:nth-of-type(even) {
+    color: #63ace5;
+}
+
+ol > li:nth-of-type(odd) {
+    color: #005b96;
+}
+
+a {
+    text-decoration: none;
+    color: red;
+}
