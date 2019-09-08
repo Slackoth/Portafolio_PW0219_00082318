@@ -1,0 +1,61 @@
+.container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    width: 100%;
+    height: 100vh;
+}
+
+.toppart {
+    display: flex;
+    justify-content: first baseline;
+    height: 20%;
+    width: 100%;
+}
+
+.mainpart {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 60%;
+}
+
+.bottompart {
+    display: flex;
+    justify-content: last baseline;
+    height: 20%;
+    width: 100%;
+}
+
+.toppart > div {
+    box-sizing: border-box;
+    margin: 5px 5px;
+    width: 100%;
+    background: rgb(33,6,77);
+}
+
+.mainpart > div {
+    box-sizing: border-box;
+    margin: 5px 5px;
+    width: 100%;
+    background:	#ff3737;
+}
+
+.bottompart > div {
+    box-sizing: border-box;
+    margin: 5px 5px;
+    width: 100%;
+    background: rgb(227,184,81);
+}
+
+div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    text-transform: uppercase;
+}
+div:hover {
+    opacity: 0.8;
+    background: black;
+}
