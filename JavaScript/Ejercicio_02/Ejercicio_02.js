@@ -62,6 +62,7 @@ function filter(array, test) {
     return passed;
 }
 filter([1,3,5,6,7,10], e => e % 2 == 0);
+
 //Ejercicio_02
 let journal = [
     {
@@ -77,30 +78,30 @@ let journal = [
         accident: true
     }
 ];
-function Transform(array, test) {
-    let arrayTran = [];
-    for(let element of array) {
 
+function Transform(array, event) {
+    let arrayEvent = [];
+    for(let element of array) {
+        arrayEvent.push(event(element));
     }
+    return arrayEvent;
 }
 
-Transform(journal, );
+Transform(journal, event => event.events);
+
 //Ejercicio_03
-/*[1,2,3,4,5]
-[3,2,4,5]
-[5,4,5]... */
 let arrayNum = [1,2,3,4,5];
-function Reduce(array) {
-    let arrayReduce = [];
+
+function Reduce(array, combine, start) {
+    let current = start;
     for(let element of array) {
-        
+        current = combine(current, element);
     }
+    return current;
 }
-let sum = arrayNum.indexOf(0) + arrayNum.indexOf(1);
-//console.log(sum);
-/*
-Reduce(arrayNum, array => {
-    return
-}); */
+Reduce(arrayNum, (a,b) => {
+    return a+b;
+}, 0);
+
 
 
