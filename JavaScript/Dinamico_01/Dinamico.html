@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Javascript dinamico</title>
+    <!--<script src="Dinamico.js"></script>-->
+</head>
+<body>
+        <h1 id="counter-space">##</h1>
+        <input id="counter-btn" type="button" value="Add">
+</body>
+<script>
+    //Metodo 1
+    /*let counter = 0;
+    let counter_btn =  document.querySelector("#counter-btn");
+    let counter_space =  document.querySelector("#counter-space");
+
+    let add = () => {
+        counter ++;
+        counter_space.innerHTML = counter;
+    }
+
+    counter_btn.addEventListener("click", ()=>{
+        add();
+    });*/
+    //Metodo 2 Closure function
+    let counter_btn =  document.querySelector("#counter-btn");
+    let counter_space =  document.querySelector("#counter-space");
+    let add = function() {
+        let counter = 0;
+        return function() {
+            counter++;
+            counter_space.innerHTML = counter;
+            return counter;
+        }
+    }
+    counter_btn.addEventListener("click", add());
+</script>
+</html>
