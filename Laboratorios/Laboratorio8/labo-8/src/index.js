@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+const carne_regex = new RegExp('[0-9]{8}');
 
 class CellButton extends React.Component{
     render(){
@@ -115,7 +116,18 @@ class FormGroup extends React.Component {
             <div className="form-group">
                 <label htmlFor="carnet" className="col-sm-2 col-form-label">Ingrese el carnet: </label>
                 <br></br>
-                <input className="form-control" type="text" name="carnet" id="carnet_field"></input>
+                <input className="form-control" type="text" name="carnet" id="carnet_field"
+                    onKeyUp={
+                        (event)=>{
+                            const keyCode = event.keyCode;
+                            const submit_btn = document.querySelector("#submit_btn");
+
+                            if(keyCode === 13) {
+                                submit_btn.click();
+                            }
+                        }
+                    }
+                ></input>
             </div>
     
             <div className="form-group">
@@ -147,9 +159,14 @@ class FormGroup extends React.Component {
                         const checkbox = document.querySelector("#late_switch");
                         const late = this.parseLateSwitch(checkbox.checked);
 
-                        this.props.onClick(carnet, schedule, late);
+                        if(carne_regex.test(carnet)) {
+                            this.props.onClick(carnet, schedule, late);
+                        }
+                        else {
+                            alert('Formato de carnet no valido pal >:v');
+                        }
                     }
-                }>Ingresar</button>
+                } >Ingresar</button>
             </div>
         </div>
         );
