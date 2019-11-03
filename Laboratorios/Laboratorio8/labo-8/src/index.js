@@ -57,11 +57,16 @@ class Row extends React.Component {
 class Table extends React.Component {
     renderRow() {
         const student_list = this.props.value;
-        if (!student_list[0].carnet) {
+        //console.log(student_list);
+        if (!student_list[0]) {
             return;
         }
         else{
-            const rows = student_list.map((object, index)=>{
+            if(!student_list[0].carnet) {
+                return;
+            }
+            else {
+                const rows = student_list.map((object, index)=>{
                 //console.log(index);
                 return <Row 
                 student={object} 
@@ -70,9 +75,10 @@ class Table extends React.Component {
                 onClick={()=>{
                     this.props.onClick(index);
                 }}
-                 />;
-            });
-            return rows;
+                />;});
+
+                return rows;
+            }
         }
     }
     
@@ -188,11 +194,11 @@ class App extends React.Component {
 
     handleDelete(position) {
         const student_list = this.state.student_list.slice();
-        console.log(position);
-        console.log(student_list);
+        //console.log(position);
+        //console.log(student_list);
         
         student_list.splice(position, 1);
-        console.log(student_list);
+        //console.log(student_list);
         this.setState({
             "student_list": student_list
         });
@@ -202,7 +208,7 @@ class App extends React.Component {
         const student_list = this.state.student_list.slice();
         let date = new Date();
         let datetime_string = date.toLocaleString();
-        if (!student_list[0].carnet) {
+        if(!student_list[0]) {
             student_list[0] = {
                 "carnet": carnet, 
                 "schedule": schedule, 
@@ -213,18 +219,31 @@ class App extends React.Component {
                 'student_list': student_list
             });
         }
-        else{
-
-            student_list.push({
-                "carnet": carnet, 
-                "schedule": schedule, 
-                "late": late,
-                "entry": datetime_string
-            });
-            this.setState({
-                'student_list': student_list
-            });
-        }      
+        else {
+            if (!student_list[0].carnet) {
+                student_list[0] = {
+                    "carnet": carnet, 
+                    "schedule": schedule, 
+                    "late": late,
+                    "entry": datetime_string
+                }
+                this.setState({
+                    'student_list': student_list
+                });
+            }
+            else{
+    
+                student_list.push({
+                    "carnet": carnet, 
+                    "schedule": schedule, 
+                    "late": late,
+                    "entry": datetime_string
+                });
+                this.setState({
+                    'student_list': student_list
+                });
+            }
+        }
     }
     
     render() {
