@@ -2,6 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+class CellButton extends React.Component{
+    render(){
+        return (
+        <button 
+            className='btn btn-danger'
+            onClick={()=>{
+                this.props.onClick();
+            }}
+            >{'Not wapo enough >:v'}
+        </button>);
+    }
+}
+
 class Cell extends React.Component {
     render() {
         return(
@@ -11,6 +24,7 @@ class Cell extends React.Component {
 }
 
 class Row extends React.Component {
+
     renderCell() {
         const student = this.props.student;
         let studentArray = Object.values(student);
@@ -21,9 +35,21 @@ class Row extends React.Component {
     }
 
     render() {
-        return (<tr className='table-active'>
-            {this.renderCell()}
-        </tr>);
+        const position = this.props.position;
+        return (
+            <tr className='table-active'>
+                {this.renderCell()}
+                <td>
+                {
+                    <CellButton 
+                        value={position}
+                        onClick={()=>{
+                            this.props.onClick(position);
+                        }}
+                    />
+                }</td>
+            </tr>
+        );
     }
 }
 
@@ -35,7 +61,15 @@ class Table extends React.Component {
         }
         else{
             const rows = student_list.map((object, index)=>{
-            return <Row student={object} key={index} />;
+                //console.log(index);
+                return <Row 
+                student={object} 
+                key={index} 
+                position={index}
+                onClick={()=>{
+                    this.props.onClick(index);
+                }}
+                 />;
             });
             return rows;
         }
@@ -50,7 +84,7 @@ class Table extends React.Component {
                     <th scope="col">Horario de laboratorio</th>
                     <th scope="col">Hora de ingreso</th>
                     <th scope="col">Tarde?</th>
-                    {/* <th scope="col">Eliminar</th> */}
+                    <th scope="col">Eliminar</th>
                 </tr>
             </thead>
                 <tbody id="table_body">
@@ -135,6 +169,18 @@ class App extends React.Component {
         }
     }
 
+    handleDelete(position) {
+        const student_list = this.state.student_list.slice();
+        console.log(position);
+        console.log(student_list);
+        
+        student_list.splice(position, 1);
+        console.log(student_list);
+        this.setState({
+            "student_list": student_list
+        });
+    }
+
     handleAdd(carnet, schedule, late) {
         const student_list = this.state.student_list.slice();
         let date = new Date();
@@ -165,7 +211,7 @@ class App extends React.Component {
     }
     
     render() {
-        console.log(this.state.student_list);
+        //console.log(this.state.student_list);
         return(
             <div className='container'>
                 <br></br>
@@ -177,6 +223,9 @@ class App extends React.Component {
             <section>
                 <Table
                     value={this.state.student_list}
+                    onClick={(position)=>{
+                        this.handleDelete(position);
+                    }}
                 />
             </section>
             </div>
