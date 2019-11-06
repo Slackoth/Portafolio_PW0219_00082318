@@ -1,0 +1,4 @@
+npm init --yes
+npm install express --save
+"express": "^4.17.1" Mayor.Menor.Patch 
+npm nodemon install
